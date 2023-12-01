@@ -1,0 +1,238 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.form-table {
+  width: max-content !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-table input[type=text],
+.form-table input[type=number],
+.form-table input[type=email],
+.form-table input[type=password],
+.form-table select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.form-table textarea {
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.form-table label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.form-table td {
+  width: max-content;
+}
+
+
+.navigation {
+  height: 70px;
+  background: #262626;
+}
+
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: 70px;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+
+.brand a,
+.brand a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
+
+article {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+
+/*Invoice Page *******************************************/
+
+#invoice-form input {
+  font-size: 0.9em;
+  color: rgb(255, 255, 255);
+}
+
+#invoice-form-items-table {
+  font-size: 0.8em;
+}
+
+input.form-control[type=number] {
+  -moz-appearance: none;
+  -webkit-appearance: textfield;
+}
+
+.table-bordered td.form-input-td {
+  padding: 0;
+  vertical-align: middle;
+}
+
+.table-bordered td,
+.table-bordered th {
+  padding: 0.25em !important;
+}
+
+.table-bordered tbody td,
+.table-bordered tbody th,
+.table-bordered thead th,
+.table-bordered thead td {
+  background: #f9f9f9;
+}
+
+.two-col-form td,
+.two-col-form th {
+  width: 25%;
+}
+
+
+#customer_search_bar,
+#supplier_search_bar,
+#item_search_bar {
+  display: none;
+  background: #f9f9f9;
+  width: 20em;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin-top:70px;
+  box-shadow: 0em 0em 1em #111;
+  padding: 0.2em;
+}
+
+
+.customer-search-result,
+.supplier-search-result,
+.product-search-result {
+  padding: 0.2em;
+  margin: 0.4em;
+  border-bottom: 0.16em solid #b9b9b9;
+  cursor: pointer;
+}
+
+.customer-search-result:hover,
+.supplier-search-result:hover,
+.product-search-result:hover {
+  background: #b9b9b9;
+}
+
+
+[readonly] {
+  caret-color: transparent;
+  transition: none;
+  border: none;
+}
+
+[readonly]:focus {
+  caret-color: transparent;
+  box-shadow: none;
+  border: none;
+
+}
+
+.table-invoice td,
+.table-invoice th {
+  border: solid #dee2e6 1px;
+}
+
+.table-invoice td,
+.table-invoice th {
+  padding: .25rem;
+}
+
+#table-invoice-total-row {
+  border-top: 2px solid #939393;
+  background: white;
+}
+
+#invoice-grand-total-table td {
+  font-weight: bold;
+  padding: .25rem;
+}
+
+
+#invoice-signature-text-row {
+  border-top: 2px solid;
+}
+
+#invoice-signature-row {
+  border-bottom: 2px solid;
+  height: 4em;
+}
+
+
+
+
+/*Customer and Product Page ************************/
+
+#add_customer_btn,
+#add_product_btn {
+  float: right;
+}
+
+/* Inventory Page */
+#inventory-table tr :hover {
+  cursor: pointer;
+}
+
+#book-table tr :hover {
+  cursor: pointer;
+}
+
+
+#invoice_profile_data {
+  white-space: pre-line;
+}
+
+/* Print invoice page ************************************/
+
+@page {
+
+  size: auto;
+  /* auto is the initial value */
+
+  /* this affects the margin in the printer settings */
+  margin: 5mm 5mm 5mm 5mm;
+}
+
+@media print {
+  .noprint {
+    display: none;
+  }
+}
+
+
+/* Login Page ******************************************/
+#login-card {
+  margin-top: 5em;
+  text-align: center;
+}

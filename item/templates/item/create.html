@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link href="{% static 'service/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Item Creation</h6>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-floating mb-3 col-md-4 item_search_area">
+                            {{itemForm.itemCode}}
+                            <input type="number" name="item_id" hidden>
+                            <label for="floatingInput">ISB Number</label>
+                        </div>
+
+                        <div class="form-floating mb-3 col-md-4 ">
+                            {{itemForm.itemName}}
+                            <label for="floatingInput">Item Name</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.description}}
+                            <label for="floatingInput">Description</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.category}}
+                            <label for="floatingInput">Category</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.unit}}
+                            <label for="floatingInput">Unit</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.make}}
+                            <label for="floatingInput">Make (Publisher)</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.location}}
+                            <label for="floatingInput">Store Location</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{itemForm.vat}}
+                            <label for="floatingInput">Vat %</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3 col-md-4">
+                            {{batchForm.batch}}
+                            <label for="floatingInput">Supplier Code</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4 supplier_search_area">
+                            <input autocomplete="off" name="supplier_name" type="text" value=""
+                                class="form-control supplier_search_input" placeholder="Supplier Name"
+                                id="supplier_name" required>
+                            <label for="floatingInput">Supplier</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{batchForm.sales_rate}}
+                            <label for="floatingInput">Sales Rate</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{batchForm.purchase_rate}}
+                            <label for="floatingInput">Purchase Rate</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{batchForm.cost}}
+                            <label for="floatingInput">Cost</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{batchForm.openingStock}}
+                            <label for="floatingInput">Opening Stock</label>
+                        </div>
+
+                        <div class="form-check mb-3 col-md-4">
+                            {{itemForm.is_vatInclusive}}
+                            <label class="form-check-label" for="flexCheckDefault">
+                                is vat Inclusive
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-4">
+
+                                <button type="submit" class="btn btn-primary full-width">Create</button>
+                            </div>
+                            <div class="mb-3 col-md-4">
+
+                                <a class="btn btn-primary full-width">Cancel</a>
+                            </div>
+                            <div class="mb-3 col-md-4">
+
+                                <a class="btn btn-primary full-width">Clear</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="item_search_bar"></div>
+<div id="supplier_search_bar"></div>
+{% endblock %}
+{% block script %}
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="{% static 'service/main.js' %}"></script>
+<script src="{% static 'service/fuse-3.4.6.min.js' %}"></script>
+{% endblock %}

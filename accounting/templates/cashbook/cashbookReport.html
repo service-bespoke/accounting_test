@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Cash Book</h6>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible fade show {{ message.tags }}" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-floating mb-3 col-md-4">
+                            <input type="date" name="from"  class="form-control" placeholder="Fron"
+                                >
+                            <label for="floatingInput">From Date</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            <input type="date" name="to"  class="form-control" placeholder="To"
+                                >
+                            <label for="floatingInput">To Date</label>
+                        </div>
+                        
+
+                       
+                      
+                        <div class="row">
+                            <div class="mb-3 mt-3 col-md-4">
+
+                                <button type="submit" class="btn btn-primary full-width">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                {% if cash_book %}
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Cash Book</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-white">
+                                <th scope="col">JS No</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                            
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cr in cash_book %}
+                            <tr>
+                                <td>{{cr.js_number}}</td>
+                                <td>{{cr.js_description}}</td>
+                                <td>{{cr.js_amount}} {{cr.transation_type}}</td>
+                                <td>{{cr.js_date}}</td>
+                              
+                   
+                            </tr>
+                            {% endfor %}
+
+                        
+   
+
+
+                            {% else %}
+                            <tr>
+                                <td colspan="9"><strong>Currently No Cash Receipt Created..!</strong></td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+
+   
+  <h2>Cash Book Report</h2>
+    <p>Report Period: {{ start_date }} to {{ end_date }}</p>
+
+    <h3>Income Entries</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in income_entries %}
+                <tr>
+                    <td>{{ entry.js_description }}</td>
+                    <td>{{ entry.js_amount }}</td>
+                    <td>{{ entry.js_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Expense Entries</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in expense_entries %}
+                <tr>
+                    <td>{{ entry.js_description }}</td>
+                    <td>{{ entry.js_amount }}</td>
+                    <td>{{ entry.js_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Summary</h3>
+    <p>Total Income: {{ total_income }}</p>
+    <p>Total Expense: {{ total_expense }}</p>
+    <p>Net Cash Flow: {{ net_cash_flow }}</p>
+        
+        {% endblock %}

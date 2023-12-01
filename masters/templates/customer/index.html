@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid pt-4 px-4">
+	<div class="bg-secondary text-center rounded p-4">
+		<div class="float_right"><a href="{% url 'masters:customer_create' %}" class="btn btn-sm btn-primary" ><span>Add New
+			Customer</span></a></div>
+		
+		<div class="col-sm-12 col-xl-12">
+			<div class="bg-secondary rounded h-100 p-4">
+				<div class="mb-3 col-md-2">
+					<h3 class="d-flex align-items-center justify-content-between mb-4">Customers</h3>
+					
+				</div>
+				<div class="table-responsive">
+					<table class="table text-start align-middle table-bordered table-hover mb-0 responsive nowrap"
+						id="myTable" width="100%">
+						<thead>
+							<tr class="text-white">
+								<th scope="col">Name</th>
+								<th scope="col">Address</th>
+								<th scope="col">Phone</th>
+								<th scope="col">TRN</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if custdetails %}
+							{% for cust in custdetails %}
+							<tr>
+								<td>{{cust.customer_name}}</td>
+								<td>{{cust.customer_address1}}</td>
+								<td>{{cust.customer_phone1}}</td>
+								<td>{{cust.customer_trn}}</td>
+								<td>
+									<a class="btn btn-sm btn-primary mr-2" href="#">Edit</a>
+									<a class="btn btn-sm btn-primary" href="#">Delete</a>
+								</td>
+							</tr>
+							{% endfor %}
+							{% else %}
+							<tr>
+								<td colspan="9"><strong>Currently No Customers Created..!</strong></td>
+							</tr>
+							{% endif %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

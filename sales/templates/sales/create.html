@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link href="{% static 'service/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="mb-5 mt-5">
+    <form method="POST" id="invoice-form" enctype="multipart/form-data">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="table-active" scope="col" colspan="4" style="background-color: #343a40;">Invoice Details
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="two-col-form">
+                <tr>
+                    <td class="form-input-td"><input name="invoice_number" type="number" class="form-control"
+                            placeholder="Invoice Number" value="{{default_invoice_number}}" readonly></td>
+
+                    <td class="form-input-td"><input name="order_number" type="number" class="form-control"
+                            placeholder="Order Number" value="{{order_number}}" readonly></td>
+                            
+                    <td class="form-input-td">
+                        <div style="display: inline-flex;"><input name="invoice_date" type="date" class="form-control"
+                                value="{{default_invoice_date}}"></div>
+                    </td>
+                    <td class="form-input-td">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="table-active" scope="col" colspan="4" style="background-color: #343a40;">Customer Details
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="two-col-form">
+                <tr>
+                    <td class="form-input-td customer_search_area">
+                        <input type="number" name="customer_id" id="customer_id" hidden>
+                        <input autocomplete="off" name="customer_name" type="text" value=""
+                            class="form-control customer_search_input" placeholder="Customer Name" id="customer_name"
+                            required>
+                    </td>
+                    <td class="form-input-td"><input autocomplete="off" name="customer_address1" type="text"
+                            class="form-control" placeholder="Address Line 1" id="customer_address1">
+                    </td>
+                    <td class="form-input-td"><input autocomplete="off" name="customer_trn" type="text"
+                            class="form-control" placeholder="TRN Number" id="customer_trn">
+                    </td>
+                    <td class="form-input-td"><input name="customer_phone" type="tel" id="customer_phone"
+                            class="form-control" placeholder="Mobile Number"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered" id="invoice-form-items-table">
+            <thead>
+                <th class="table-active" scope="col" colspan="8">Item List</th>
+
+                <tr>
+                    <th scope="col" style="width:5%;">Sl No.</th>
+                    <th scope="col" style="width:20%;">ISBN</th>
+                    <th scope="col" style="width:20%;">Name</th>
+                    <th scope="col" style="width:20%;">Description</th>
+                    <th scope="col" style="width:10%;">RATE</th>
+                    <th scope="col" style="width:10%;">َQTY</th>
+                    <th scope="col" style="width:15%;">AMOUNT</th>
+                    <th scope="col" style="width:3%;"></th>
+                </tr>
+            </thead>
+            <tbody id="invoice-form-items-table-body">
+                <tr>
+
+                    <td class="invoice-item-slno">1</td>
+                    <td class="form-input-td">
+                        <input name="item_code" type="text" class="form-control " placeholder="ISB Number">
+                    </td>
+                    <td class="form-input-td">
+                        <input name="item_name" type="text" class="form-control " placeholder="Item Name">
+                    </td>
+                    <td class="form-input-td">
+                        <input name="description" type="text" class="form-control " placeholder="Description">
+                    </td>
+                    <td class="form-input-td">
+                        <input name="item-qty" type="number" class="form-control" placeholder="QTY" step="any">
+                    </td>
+                    <td class="form-input-td">
+                        <input name="item-rate" type="number" class="form-control" placeholder="RATE" step="any">
+                    </td>
+                    <td class="form-input-td">
+                        <input name="amount" type="number" class="form-control" placeholder="AMOUNT" step="any">
+                    </td>
+                    <td>
+                        <a class="btn btn-primary cut" id="cut" onclick="deleterow(event)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+
+            <tr>
+                <td colspan="6" class="text-right"><strong>TOTAL:</strong></td>
+                <td class="form-input-td"><input name="bill-total" type="number" step="any" class="form-control"
+                        required></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-right"><strong>Add 5% Vat :</strong></td>
+                <td class="form-input-td"><input name="bill-vat" type="number" step="any" class="form-control"
+                        value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-right"><strong>DISCOUNT:</strong></td>
+                <td class="form-input-td"><input name="bill-discount" type="number" step="any" class="form-control"
+                        value="0"></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-right"><strong>GRAND TOTAL:</strong></td>
+                <td class="form-input-td"><input name="bill-grandtotal" type="number" step="any" class="form-control"
+                        required readonly></td>
+            </tr>
+
+        </table>
+
+        <button class="btn btn-primary" id="invoice-form-addrow">+</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+<div id="customer_search_bar"></div>
+<div id="product_search_bar"></div>
+
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="{% static 'service/main.js' %}"></script>
+<script src="{% static 'service/fuse-3.4.6.min.js' %}"></script>
+{% endblock %}

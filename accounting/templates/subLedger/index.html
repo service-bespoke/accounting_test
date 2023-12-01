@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Create Sub Ledger</h6>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible fade show {{ message.tags }}" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-floating mb-3 col-md-4">
+                            <input type="number" value="{{sl_no}}" class="form-control" placeholder="SL Number"
+                                readonly>
+                            <label for="floatingInput">SL Number</label>
+                        </div>
+
+                      
+                        
+                        <div class="form-floating mb-3 col-md-4">
+                            {{slForm.sl_description}}
+                            <label for="floatingInput">SL Description</label>
+                        </div>
+
+                        <div class="form-floating mb-3 col-md-4">
+                            {{slForm.group_ledger}}
+                            <label for="floatingInput">Group Ledger</label>
+                        </div>
+                        
+                        
+                        
+
+                        <div class="form-floating mb-3 col-md-4">
+                            {{slForm.ob_amount}}
+                            <label for="floatingInput">Amount</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{slForm.remark}}
+                            <label for="floatingInput">Remarks</label>
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{slForm.ob_date}}
+                            
+                            <label for="floatingInput">Date</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 mt-3 col-md-4">
+
+                                <button type="submit" class="btn btn-primary full-width">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Sub Ledger</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-white">
+                                <th scope="col">Sl No</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                            
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if sub_ledger %}
+                            {% for sl in sub_ledger %}
+                            <tr>
+                                <td>{{sl.sl_no}}</td>
+                                <td>{{sl.sl_description}}</td>
+                                <td>{{sl.ob_amount}}</td>
+                                <td>{{sl.ob_date}}</td>
+                                
+                                <td><a class="btn btn-sm btn-primary mr-2 mb-2"
+                                    href="{% url 'accounting:sl_edit' pk=sl.pk %}">Edit</a>
+                                    <a class="btn btn-sm btn-primary" href="{% url 'accounting:sl_delete' pk=sl.pk %}"
+                                    onclick="return confirm('Are you sure you want to delete this SL?');">Delete</a>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="9"><strong>Currently No Sub Ledgers Created..!</strong></td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
